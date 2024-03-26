@@ -34,9 +34,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		deleteFavorite: (uid, category) => {
 		  let store = getStore();
 		  let newFavorites = store.favorites.filter(
+		// 	(favorite) =>
+		// 	  favorite.item.uid != uid && favorite.category != category
+		//   );
 			(favorite) =>
-			  favorite.item.uid != uid && favorite.category != category
-		  );
+			!(favorite.item.uid === uid && favorite.category === category)
+			);
 		  setStore({ favorites: newFavorites });
 		},
 	  },
