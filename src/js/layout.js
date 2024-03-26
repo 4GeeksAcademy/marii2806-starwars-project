@@ -10,34 +10,43 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SinglePerson } from "./views/SinglePerson";
-import { Details} from "./views/Details";
+import { Details } from "./views/Details";
 
 //create your first component
 const Layout = () => {
-	//the basename is used when your project is published in a subdirectory and not in the root of the domain
-	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
-	const basename = process.env.BASENAME || "";
+  //the basename is used when your project is published in a subdirectory and not in the root of the domain
+  // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
+  const basename = process.env.BASENAME || "";
 
-	return (
-		<div className="container">
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Navbar />
-					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/demo" element={<Demo />} />
-						<Route path="/people/:uid" element={<SinglePerson />} />
-						<Route path="/single/:theid" element={<Single />} />
-						{/* <Route path="/details/characters/:theid" element={<Details category="characters" />} /> */}
-						<Route path="/details/planets/:theid" element={<Details category="planets" />} />
-						<Route path="/details/starships/:theid" element={<Details category="starships" />} />
-						<Route path="*" element={<h1>Not found!</h1>} />
-					</Routes>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div className="container">
+      <BrowserRouter basename={basename}>
+        <ScrollToTop>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/demo" element={<Demo />} />
+            <Route path="/people/:uid" element={<SinglePerson />} />
+            <Route path="/single/:theid" element={<Single />} />
+            <Route
+              path="/details/people/:theid"
+              element={<Details category="people" />}
+            />
+            <Route
+              path="/details/planets/:theid"
+              element={<Details category="planets" />}
+            />
+            <Route
+              path="/details/starships/:theid"
+              element={<Details category="starships" />}
+            />
+            <Route path="*" element={<h1>Not found!</h1>} />
+          </Routes>
+          <Footer />
+        </ScrollToTop>
+      </BrowserRouter>
+    </div>
+  );
 };
 
 export default injectContext(Layout);

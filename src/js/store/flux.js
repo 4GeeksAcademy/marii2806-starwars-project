@@ -5,101 +5,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 		characters: [],
 		planets: [],
 		starships: [],
+		favorites: [],
 	  },
 	  actions: {
 		getCharacters: () => {
-		  let store = getStore();
-		  for (let i = 1; i <= 2; i++) {
-			fetch(BASE_URL + "people?page=" + i + "&limit=10")
-			  .then((response) => response.json())
-			  .then((data) => {
-				for (let j = 0; j < data.results.length; j++) {
-				  fetch(BASE_URL + "people/" + data.results[j].uid)
-					.then((resp) => resp.json())
-					.then((characterInfo) => {
-						if (characterInfo.result.name){
-							store.characters.push(characterInfo.result);
-					  setStore(store);
-						}
-						
-					})
-					.catch((error) => console.log(error));
-				}
-			  })
-			  .catch((error) => console.log(error));
-		  }
+		  fetch(BASE_URL + "people?page=1&limit=50")
+			.then((response) => response.json())
+			.then((data) => setStore({ characters: data.results }))
+			.catch((error) => console.log(error));
 		},
-	
 		getPlanets: () => {
-		  let store = getStore();
-		  for (let i = 1; i <= 2; i++) {
-			fetch(BASE_URL + "planets?page=" + i + "&limit=10")
-			  .then((response) => response.json())
-			  .then((data) => {
-				for (let j = 0; j < data.results.length; j++) {
-				  fetch(BASE_URL + "planets/" + data.results[j].uid)
-					.then((resp) => resp.json())
-					.then((planetInfo) => {
-						if (planetInfo.result.name){
-							store.planets.push(planetInfo.result);
-					  setStore(store);
-						}
-					})
-					.catch((error) => console.log(error));
-				}
-			  })
-			  .catch((error) => console.log(error));
-		  }
+		  fetch(BASE_URL + "planets?page=1&limit=50")
+			.then((response) => response.json())
+			.then((data) => setStore({ planets: data.results }))
+			.catch((error) => console.log(error));
 		},
-		
 		getStarships: () => {
-		  let store = getStore();
-		//   for (let i = 1; i <= 2; i++) {
-			fetch(BASE_URL + "starships?page=" + 1 + "&limit=10")
-			  .then((response) => response.json())
-			  .then((data) => {
-				console.log(data)
-				setStore({starships:data.results})
-				// for (let j = 0; j < data.results.length; j++) {
-				//   fetch(BASE_URL + "starships/" + data.results[j].uid)
-				// 	.then((resp) => resp.json())
-				// 	.then((starshipInfo) => {
-				// 	  store.starships.push(starshipInfo.result);
-				// 	  setStore(store);
-				// 	})
-				// 	.catch((error) => console.log(error));
-				// }
-			  })
-			  .catch((error) => console.log(error));
-		//   }
+		  fetch(BASE_URL + "starships?page=1&limit=50")
+			.then((response) => response.json())
+			.then((data) => setStore({ starships: data.results }))
+			.catch((error) => console.log(error));
 		},
-		// getCharacters: async () => {
-		//   let store = getStore();
-  
-		//   for (let i = 1; i <= 9; i++) {
-		//     try {
-		//       const response = await fetch(BASE_URL + `people?page=${i}&limit=10`);
-		//       const data = await response.json();
-  
-		//       for (const result of data.results) {
-		//         try {
-		//           const characterResponse = await fetch(BASE_URL + `people/${result.uid}`);
-		//           const characterInfo = await characterResponse.json();
-  
-		//           store.characters.push(characterInfo.result);
-		//           setStore(store);
-		//         } catch (error) {
-		//           console.log(error);
-		//         }
-		//       }
-		//     } catch (error) {
-		//       console.log(error);
-		//     }
-		//   }
-		// }
+		addFavorite: (item, category) => {
+		  let store = getStore();
+		  store.favorites.push({ item: item, category: category });
+		  setStore(store);
+		},
+		deleteFavorite: (uid, category) => {
+		  let store = getStore();
+		  let newFavorites = store.favorites.filter(
+			(favorite) =>
+			  favorite.item.uid != uid && favorite.category != category
+		  );
+		  setStore({ favorites: newFavorites });
+		},
 	  },
 	};
   };
   
   export default getState;
-  
