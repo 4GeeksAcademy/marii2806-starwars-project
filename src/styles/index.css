@@ -34,3 +34,9 @@ body{
     height: 400px;
     object-fit: cover;
 };
+
+.dataRow{
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}

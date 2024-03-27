@@ -20,7 +20,7 @@ export const Navbar = () => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Favorites
+          ♡ Favorites {store.favorites.length}
         </button>
         <ul className="dropdown-menu">
           <li>
@@ -33,6 +33,9 @@ export const Navbar = () => {
                   <Link to={"/details/people/" + favorite.item.uid}>
                     {favorite.item.name}
                   </Link>
+                  <span onClick={() => actions.deleteFavorite(favorite.item.uid, favorite.category)}>
+									  <i className="fa-regular fa-trash-can"></i>
+								  </span>
                 </div>
               ))}
           </li>
@@ -46,6 +49,9 @@ export const Navbar = () => {
                   <Link to={"/details/planets/" + favorite.item.uid}>
                     {favorite.item.name}
                   </Link>
+                  <span onClick={() => actions.deleteFavorite(favorite.item.uid, favorite.category)}>
+									  <i className="fa-regular fa-trash-can"></i>
+								  </span>
                 </div>
               ))}
           </li>
@@ -59,6 +65,9 @@ export const Navbar = () => {
                   <Link to={"/details/starships/" + favorite.item.uid}>
                     {favorite.item.name}
                   </Link>
+                  <span onClick={() => actions.deleteFavorite(favorite.item.uid, favorite.category)}>
+									  <i className="fa-regular fa-trash-can"></i>
+								  </span>
                 </div>
               ))}
           </li>

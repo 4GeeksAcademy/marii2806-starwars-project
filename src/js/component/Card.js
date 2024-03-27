@@ -16,11 +16,16 @@ export const Card = ({ item, category }) => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const [imageUrl, setImageUrl] = useState("https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/"+(category=="people"?"characters":category=="planets"?"planets":"starships")+"/"+item.uid+".jpg")
+
+  const backupImageUrl = "https://dummyimage.com/400x550/000/fff&text=starwars"
+
   return (
     <div>
       {item !== undefined ? (
         <div className="card" style={{ width: "18rem" }}>
-          <img src="..." className="card-img-top" alt="..." />
+          <img src={imageUrl} onError={()=> {setImageUrl(backupImageUrl)}} className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{fetchItem?.properties.name}</h5>
             <p className="card-text">
