@@ -10,10 +10,10 @@ export const Home = () => {
     <div className="Home">
       <div className="text-center mt-5">
         <h2>Characters</h2>
-        <div className = "row dataRow">
+        <div className="row dataRow">
           {store.characters.map((character, index) => {
             return (
-              <Card className = "col"
+              <Card
                 key={character.uid}
                 item={character}
                 index={index}
@@ -25,7 +25,7 @@ export const Home = () => {
       </div>
       <div className="text-center mt-5">
         <h2>Planets</h2>
-        <div className = "dataRow">
+        <div className="row dataRow">
           {store.planets.map((planet, index) => {
             return (
               <Card
@@ -40,7 +40,7 @@ export const Home = () => {
       </div>
       <div className="text-center mt-5">
         <h2>Starships</h2>
-        <div className = "dataRow">
+        <div className="row dataRow">
           {store.starships.map((starship, index) => {
             console.log(store.starships);
             return (
